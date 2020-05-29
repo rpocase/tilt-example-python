@@ -1,0 +1,11 @@
+# -*- mode: Python -*
+include('./Tiltfile')
+
+# Add a live_update rule to our docker_build
+docker_build('example-python-image', '.', build_args={'flask_env': 'development'},
+    live_update=[
+        fall_back_on(['./requirements.txt']),
+        sync('.', '/app')
+        ]
+    )
+

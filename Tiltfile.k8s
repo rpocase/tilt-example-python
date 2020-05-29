@@ -1,0 +1,15 @@
+# -*- mode: Python -*
+
+k8s_yaml('kubernetes.yaml')
+k8s_resource('example-python', port_forwards=8000)
+default_registry(
+  'localhost:5000',
+  host_from_cluster='registry:5000'
+)
+
+docker_build('example-python-image', '.', build_args={'flask_env': 'development'},
+    live_update=[
+        fall_back_on('./requirements.txt'),
+        sync('.', '/app'),
+])
+
