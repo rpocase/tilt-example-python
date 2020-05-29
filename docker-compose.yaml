@@ -3,6 +3,6 @@ version: '3'
 services:
   example-python:
     build: .
-    gmage: example-python-image
+    image: example-python-image
     ports:
       - "8000:8000"
